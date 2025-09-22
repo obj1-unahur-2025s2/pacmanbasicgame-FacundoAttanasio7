@@ -11,9 +11,30 @@ program pacmanGame {
 	game.boardGround("pacmanBackground.jpg")
 	
 	// personaje principal
-	game.addVisualCharacter(pacman)
+	game.addVisual(pacman)
+	
+	keyboard.w().onPressDo({pacman.moverseHaciaArriba()})
+	keyboard.s().onPressDo({pacman.moverseHaciaAbajo()})
+	keyboard.a().onPressDo({pacman.moverseHaciaIzquierda()})
+	keyboard.d().onPressDo({pacman.moverseHaciaDerecha()})
+
+
+
+	game.addVisual(fantasmaRojo)
+	game.addVisual(fantasmaAzul)
+
+	rivales.forEach({
+		r => game.whenCollideDo(r, {
+			personaje =>
+		personaje.perderVida()
+		game.say(personaje, "Me Quedan" + personaje.vidas() + "vidas")
+		})
+	})
+
 	
 	// que arranque el juego!
 	game.start()
 	
+
+
 }
